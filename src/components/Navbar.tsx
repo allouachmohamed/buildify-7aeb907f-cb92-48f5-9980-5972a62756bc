@@ -30,6 +30,9 @@ const Navbar = () => {
             <Link to="/" className="px-3 py-2 rounded-md hover:bg-primary-foreground/10">
               {t('navigation.home')}
             </Link>
+            <Link to="/quran" className="px-3 py-2 rounded-md hover:bg-primary-foreground/10">
+              {language === 'ar' ? 'القرآن' : 'Quran'}
+            </Link>
             <Link to="/settings" className="px-3 py-2 rounded-md hover:bg-primary-foreground/10">
               {t('navigation.settings')}
             </Link>
