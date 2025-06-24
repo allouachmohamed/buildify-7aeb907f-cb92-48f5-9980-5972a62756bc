@@ -11,26 +11,46 @@ const AboutPage = () => {
       <div className="bg-card rounded-lg shadow-md p-6">
         <p className="mb-4">{t('about.description')}</p>
         
-        <div className="space-y-2 mt-6">
+        <div className="space-y-4 mt-6">
           <div className="flex justify-between">
             <span className="font-medium">{t('about.version')}:</span>
-            <span>1.0.0</span>
+            <span>2.0.0</span>
           </div>
           
           <div className="flex justify-between">
             <span className="font-medium">{t('about.developer')}:</span>
-            <span>Buildify</span>
+            <span>Islamic Prayer Times Team</span>
           </div>
           
           <div className="flex justify-between">
             <span className="font-medium">{t('about.contact')}:</span>
-            <span>support@example.com</span>
+            <span>prayertimes@example.org</span>
           </div>
+          
+          <div className="flex justify-between">
+            <span className="font-medium">Website:</span>
+            <a href="https://prayertimes.example.org" className="text-primary hover:underline">
+              prayertimes.example.org
+            </a>
+          </div>
+          
+          <div className="flex justify-between">
+            <span className="font-medium">Last Updated:</span>
+            <span>June 24, 2025</span>
+          </div>
+        </div>
+        
+        <div className="mt-8 p-4 bg-primary/10 rounded-lg border border-primary/20">
+          <h3 className="font-semibold mb-2">About Prayer Times</h3>
+          <p className="text-sm">
+            This application uses the Aladhan API to provide accurate prayer times based on various calculation methods.
+            Prayer times are calculated using geographical coordinates and astronomical calculations.
+          </p>
         </div>
         
         <div className="mt-8 text-center">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} {t('app.title')}
+            © {new Date().getFullYear()} {t('app.title')} - All Rights Reserved
           </p>
         </div>
       </div>
