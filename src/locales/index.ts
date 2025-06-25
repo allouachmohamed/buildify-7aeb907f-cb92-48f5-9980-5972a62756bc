@@ -9,7 +9,6 @@ const translations = {
       home: 'Home',
       settings: 'Settings',
       about: 'About',
-      quran: 'Quran',
     },
     prayers: {
       fajr: 'Fajr',
@@ -56,18 +55,6 @@ const translations = {
       prayerTimes: 'Could not fetch prayer times',
       tryAgain: 'Try Again',
     },
-    quran: {
-      title: 'The Holy Quran',
-      subtitle: 'Listen to the Holy Quran by your favorite reciters',
-      selectLanguage: 'Select Language',
-      searchReciter: 'Search for a reciter',
-      noReciters: 'No reciters found',
-      versions: 'Versions',
-      selectVersion: 'Select Recitation Version',
-      selectSurah: 'Select Surah',
-      information: 'Information',
-      infoText: 'This application uses the API from mp3quran.net to provide Quran recitations from various reciters around the world.',
-    },
   },
   ar: {
     app: {
@@ -78,7 +65,6 @@ const translations = {
       home: 'الرئيسية',
       settings: 'الإعدادات',
       about: 'حول',
-      quran: 'القرآن',
     },
     prayers: {
       fajr: 'الفجر',
@@ -124,18 +110,6 @@ const translations = {
       location: 'تعذر تحديد الموقع',
       prayerTimes: 'تعذر جلب مواقيت الصلاة',
       tryAgain: 'حاول مرة أخرى',
-    },
-    quran: {
-      title: 'القرآن الكريم',
-      subtitle: 'استمع إلى القرآن الكريم بصوت قرائك المفضلين',
-      selectLanguage: 'اختر اللغة',
-      searchReciter: 'ابحث عن قارئ',
-      noReciters: 'لا يوجد قراء',
-      versions: 'مصحف',
-      selectVersion: 'اختر المصحف',
-      selectSurah: 'اختر السورة',
-      information: 'معلومات',
-      infoText: 'هذا التطبيق يستخدم واجهة برمجة التطبيقات من mp3quran.net لتوفير تلاوات القرآن الكريم من مختلف القراء حول العالم.',
     },
   },
 };
