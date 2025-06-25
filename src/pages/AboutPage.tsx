@@ -23,14 +23,16 @@ const AboutPage = () => {
           </div>
           
           <div className="flex justify-between">
-            <span className="font-medium">{t('about.contact')}:</span>
-            <span>Allouachmohamed@gmail.com</span>
+            <span className="font-medium">{t('about.phone')}:</span>
+            <a href="tel:+213558238279" className="text-primary hover:underline">
+              +213 558 238 279
+            </a>
           </div>
           
           <div className="flex justify-between">
-            <span className="font-medium">Website:</span>
-            <a href="https://prayertimes.example.org" className="text-primary hover:underline">
-              prayertimes.example.org
+            <span className="font-medium">{t('about.telegram')}:</span>
+            <a href="https://t.me/Allouachmohamed" className="text-primary hover:underline">
+              t.me/Allouachmohamed
             </a>
           </div>
           
@@ -41,11 +43,17 @@ const AboutPage = () => {
         </div>
         
         <div className="mt-8 p-4 bg-primary/10 rounded-lg border border-primary/20">
-          <h3 className="font-semibold mb-2">About Prayer Times</h3>
-          <p className="text-sm">
-            This application uses the Aladhan API to provide accurate prayer times based on various calculation methods.
-            Prayer times are calculated using geographical coordinates and astronomical calculations.
-          </p>
+          <h3 className="font-semibold mb-2">Features</h3>
+          <ul className="list-disc list-inside space-y-1 text-sm">
+            <li>Prayer times for locations worldwide</li>
+            <li>Adhan (call to prayer) player</li>
+            <li>Tasbih counter for dhikr</li>
+            <li>Quran player with multiple reciters</li>
+            <li>Qibla direction finder</li>
+            <li>Morning and evening remembrances</li>
+            <li>Dark and light theme</li>
+            <li>Arabic and English language support</li>
+          </ul>
         </div>
         
         <div className="mt-8 text-center">
