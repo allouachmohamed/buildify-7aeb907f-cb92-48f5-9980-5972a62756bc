@@ -19,12 +19,12 @@ const AboutPage = () => {
           
           <div className="flex justify-between">
             <span className="font-medium">{t('about.developer')}:</span>
-            <span>Islamic Prayer Times Team</span>
+            <span>Allouach Mohamed</span>
           </div>
           
           <div className="flex justify-between">
             <span className="font-medium">{t('about.contact')}:</span>
-            <span>prayertimes@example.org</span>
+            <span>Allouachmohamed@gmail.com</span>
           </div>
           
           <div className="flex justify-between">
@@ -36,7 +36,7 @@ const AboutPage = () => {
           
           <div className="flex justify-between">
             <span className="font-medium">Last Updated:</span>
-            <span>June 24, 2025</span>
+            <span>June 25, 2025</span>
           </div>
         </div>
         
