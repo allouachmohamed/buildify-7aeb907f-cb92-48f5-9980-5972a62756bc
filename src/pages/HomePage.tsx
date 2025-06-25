@@ -1,11 +1,12 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useLanguage } from '../contexts/LanguageContext';
 import PrayerTimeCard from '../components/PrayerTimeCard';
 import LocationSelector from '../components/LocationSelector';
 import { fetchPrayerTimes } from '../services/prayerService';
 import { toast } from 'sonner';
+import { Volume2, VolumeX } from 'lucide-react';
 
 interface Location {
   latitude: number;
@@ -18,6 +19,8 @@ const HomePage = () => {
   const { t } = useLanguage();
   const [location, setLocation] = useState<Location | null>(null);
   const [date, setDate] = useState<Date>(new Date());
+  const [isPlayingAdhan, setIsPlayingAdhan] = useState(false);
+  const adhanRef = useRef<HTMLAudioElement | null>(null);
 
   // Get user's location on component mount
   useEffect(() => {
@@ -27,6 +30,21 @@ const HomePage = () => {
     } else {
       getCurrentLocation();
     }
+
+    // Initialize adhan audio
+    adhanRef.current = new Audio('/adhan.mp3');
+    adhanRef.current.addEventListener('ended', () => {
+      setIsPlayingAdhan(false);
+    });
+
+    return () => {
+      if (adhanRef.current) {
+        adhanRef.current.pause();
+        adhanRef.current.removeEventListener('ended', () => {
+          setIsPlayingAdhan(false);
+        });
+      }
+    };
   }, []);
 
   const getCurrentLocation = () => {
@@ -74,6 +92,19 @@ const HomePage = () => {
     localStorage.setItem('savedLocation', JSON.stringify(newLocation));
   };
 
+  const toggleAdhan = () => {
+    if (!adhanRef.current) return;
+    
+    if (isPlayingAdhan) {
+      adhanRef.current.pause();
+      adhanRef.current.currentTime = 0;
+      setIsPlayingAdhan(false);
+    } else {
+      adhanRef.current.play();
+      setIsPlayingAdhan(true);
+    }
+  };
+
   if (!location) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
@@ -98,6 +129,30 @@ const HomePage = () => {
         currentLocation={location} 
         onLocationChange={handleLocationChange} 
       />
+      
+      {/* Adhan Player */}
+      <div className="mb-6 flex justify-center">
+        <button
+          onClick={toggleAdhan}
+          className={`flex items-center gap-2 px-6 py-3 rounded-full ${
+            isPlayingAdhan 
+              ? 'bg-red-500 hover:bg-red-600' 
+              : 'bg-green-600 hover:bg-green-700'
+          } text-white transition-colors`}
+        >
+          {isPlayingAdhan ? (
+            <>
+              <VolumeX size={20} />
+              {t('prayers.stopAdhan')}
+            </>
+          ) : (
+            <>
+              <Volume2 size={20} />
+              {t('prayers.playAdhan')}
+            </>
+          )}
+        </button>
+      </div>
       
       {isLoading ? (
         <div className="flex justify-center my-12">
