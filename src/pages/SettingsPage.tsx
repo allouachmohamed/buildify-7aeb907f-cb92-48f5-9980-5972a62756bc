@@ -4,11 +4,24 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { useTheme } from '../components/theme-provider';
 import { getCalculationMethods } from '../services/prayerService';
 import { toast } from 'sonner';
+import { Volume2 } from 'lucide-react';
 
 interface CalculationMethod {
   id: number;
   name: string;
 }
+
+interface AdhanOption {
+  id: string;
+  name: string;
+  file: string;
+}
+
+const adhanOptions: AdhanOption[] = [
+  { id: 'makkah', name: 'Makkah Adhan', file: 'makkah-adhan.mp3' },
+  { id: 'madinah', name: 'Madinah Adhan', file: 'madinah-adhan.mp3' },
+  { id: 'alaqsa', name: 'Al-Aqsa Adhan', file: 'alaqsa-adhan.mp3' },
+];
 
 const SettingsPage = () => {
   const { language, setLanguage, t } = useLanguage();
@@ -16,6 +29,9 @@ const SettingsPage = () => {
   const [calculationMethods, setCalculationMethods] = useState<CalculationMethod[]>([]);
   const [selectedMethod, setSelectedMethod] = useState<number>(2); // Default to Islamic Society of North America
   const [notificationsEnabled, setNotificationsEnabled] = useState<boolean>(false);
+  const [selectedAdhan, setSelectedAdhan] = useState<string>('makkah');
+  const [isPlayingAdhan, setIsPlayingAdhan] = useState(false);
+  const [adhanAudio, setAdhanAudio] = useState<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     // Load saved settings
@@ -29,6 +45,11 @@ const SettingsPage = () => {
       setNotificationsEnabled(savedNotifications === 'true');
     }
     
+    const savedAdhan = localStorage.getItem('selectedAdhan');
+    if (savedAdhan) {
+      setSelectedAdhan(savedAdhan);
+    }
+    
     // Fetch calculation methods
     const fetchMethods = async () => {
       try {
@@ -40,13 +61,59 @@ const SettingsPage = () => {
     };
     
     fetchMethods();
+    
+    // Initialize adhan audio
+    const audio = new Audio(`/${selectedAdhan}.mp3`);
+    setAdhanAudio(audio);
+    
+    return () => {
+      if (adhanAudio) {
+        adhanAudio.pause();
+      }
+    };
   }, []);
+
+  // Update adhan audio when selection changes
+  useEffect(() => {
+    if (adhanAudio) {
+      adhanAudio.pause();
+      setIsPlayingAdhan(false);
+    }
+    
+    const audio = new Audio(`/${selectedAdhan}.mp3`);
+    setAdhanAudio(audio);
+    
+    audio.addEventListener('ended', () => {
+      setIsPlayingAdhan(false);
+    });
+    
+    return () => {
+      audio.removeEventListener('ended', () => {
+        setIsPlayingAdhan(false);
+      });
+      audio.pause();
+    };
+  }, [selectedAdhan]);
 
   const handleSaveSettings = () => {
     localStorage.setItem('calculationMethod', selectedMethod.toString());
     localStorage.setItem('notificationsEnabled', notificationsEnabled.toString());
+    localStorage.setItem('selectedAdhan', selectedAdhan);
     
     toast.success(t('settings.save'));
+  };
+
+  const playAdhanPreview = () => {
+    if (!adhanAudio) return;
+    
+    if (isPlayingAdhan) {
+      adhanAudio.pause();
+      adhanAudio.currentTime = 0;
+      setIsPlayingAdhan(false);
+    } else {
+      adhanAudio.play();
+      setIsPlayingAdhan(true);
+    }
   };
 
   return (
@@ -115,6 +182,38 @@ const SettingsPage = () => {
             >
               {t('settings.system')}
             </button>
+          </div>
+        </div>
+        
+        {/* Adhan Settings */}
+        <div className="bg-card rounded-lg shadow-md p-6">
+          <h2 className="text-xl font-semibold mb-4">{t('settings.adhanSound')}</h2>
+          <div className="space-y-4">
+            {adhanOptions.map((option) => (
+              <div key={option.id} className="flex items-center">
+                <input
+                  type="radio"
+                  id={option.id}
+                  name="adhan"
+                  value={option.id}
+                  checked={selectedAdhan === option.id}
+                  onChange={() => setSelectedAdhan(option.id)}
+                  className="mr-2 h-4 w-4"
+                />
+                <label htmlFor={option.id} className="flex-grow">{option.name}</label>
+                <button
+                  onClick={playAdhanPreview}
+                  className={`p-2 rounded-full ${
+                    isPlayingAdhan && selectedAdhan === option.id
+                      ? 'bg-primary text-primary-foreground'
+                      : 'bg-muted hover:bg-muted/80'
+                  }`}
+                  aria-label="Play Adhan Preview"
+                >
+                  <Volume2 size={16} />
+                </button>
+              </div>
+            ))}
           </div>
         </div>
         
