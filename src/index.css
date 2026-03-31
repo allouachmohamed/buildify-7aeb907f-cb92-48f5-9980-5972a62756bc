@@ -5,48 +5,81 @@
 
 @layer base {
   :root {
+    /* Light Mode Colors */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 222 47% 11%;
+    
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 222 47% 11%;
+    
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 142.1 76.2% 36.3%;
-    --primary-foreground: 355.7 100% 97.3%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 142.1 76.2% 36.3%;
+    --popover-foreground: 222 47% 11%;
+    
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+    
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    
+    --accent: 142 76% 36%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 221 83% 53%;
+    
     --radius: 0.5rem;
+    
+    --success: 142 76% 36%;
+    --warning: 38 92% 50%;
+    --info: 199 89% 48%;
+    
+    /* Social Media Specific */
+    --hover-overlay: 221 83% 53% / 0.1;
+    --active-overlay: 221 83% 53% / 0.15;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 222 47% 11%;
     --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
+    
+    --card: 217 33% 17%;
     --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
+    
+    --popover: 217 33% 17%;
     --popover-foreground: 210 40% 98%;
-    --primary: 142.1 70.6% 45.3%;
-    --primary-foreground: 144.9 80.4% 10%;
-    --secondary: 217.2 32.6% 17.5%;
+    
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 217 33% 17%;
     --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 142.4 71.8% 29.2%;
+    
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+    
+    --accent: 142 76% 36%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 217 33% 24%;
+    --input: 217 33% 24%;
+    --ring: 221 83% 53%;
+    
+    --success: 142 76% 36%;
+    --warning: 38 92% 50%;
+    --info: 199 89% 48%;
+    
+    --hover-overlay: 210 40% 98% / 0.05;
+    --active-overlay: 210 40% 98% / 0.1;
   }
 }
 
@@ -54,170 +87,104 @@
   * {
     @apply border-border;
   }
+  
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/30 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/50;
   }
 }
 
-/* Arabic font */
-@font-face {
-  font-family: 'Arabic';
-  src: url('https://fonts.googleapis.com/css2?family=Amiri&display=swap');
-  font-weight: normal;
-  font-style: normal;
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Smooth transitions */
+  .transition-smooth {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Hover effects */
+  .hover-lift {
+    @apply transition-smooth hover:-translate-y-0.5 hover:shadow-lg;
+  }
+  
+  .hover-scale {
+    @apply transition-smooth hover:scale-105;
+  }
+  
+  /* Mobile optimizations */
+  .mobile-container {
+    @apply max-w-2xl mx-auto;
+  }
+  
+  /* Glass morphism effect */
+  .glass {
+    @apply bg-background/80 backdrop-blur-lg border border-border/50;
+  }
+  
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+  }
 }
 
-/* RTL support */
-[dir="rtl"] * {
-  text-align: right;
+/* Animations */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-html[dir="rtl"] .font-arabic {
-  font-family: 'Amiri', serif;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-/* Custom styles for the app */
-.tasbih-button {
-  transition: all 0.2s ease;
-}
-
-.tasbih-button:active {
-  transform: scale(0.95);
-}
-
-/* Qibla compass */
-.compass-container {
-  position: relative;
-  width: 250px;
-  height: 250px;
-  margin: 0 auto;
-}
-
-.compass-ring {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-}
-
-.compass-arrow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 4px;
-  height: 100px;
-  background-color: var(--primary);
-  transform-origin: bottom center;
-  transform: translate(-50%, -100%);
-}
-
-.compass-arrow:before {
-  content: '';
-  position: absolute;
-  top: -10px;
-  left: -8px;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 15px solid var(--primary);
-}
-
-/* Quran player */
-.audio-progress {
-  height: 6px;
-  background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 3px;
-  cursor: pointer;
-  position: relative;
-}
-
-.audio-progress-fill {
-  height: 100%;
-  background-color: var(--primary);
-  border-radius: 3px;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.audio-controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-}
-
-.play-button {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: var(--primary);
-  color: var(--primary-foreground);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.play-button:hover {
-  transform: scale(1.05);
-}
-
-/* Dhikr card */
-.dhikr-arabic {
-  font-family: 'Amiri', serif;
-  font-size: 1.5rem;
-  line-height: 2.5rem;
-  text-align: right;
-  direction: rtl;
-}
-
-.dhikr-translation {
-  font-size: 0.9rem;
-  line-height: 1.5rem;
-  margin-top: 1rem;
-}
-
-.dhikr-counter {
-  display: flex;
-  gap: 4px;
-  justify-content: center;
-  margin: 1rem 0;
-}
-
-.dhikr-counter-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
-
-.dhikr-counter-dot.completed {
-  background-color: var(--primary);
-}
-
-.dhikr-counter-dot.current {
-  background-color: var(--primary);
-  animation: pulse 1.5s infinite;
-}
-
-.dhikr-counter-dot.pending {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
+@keyframes pulse-subtle {
+  0%, 100% {
     opacity: 1;
   }
   50% {
-    transform: scale(1.2);
-    opacity: 0.7;
+    opacity: 0.8;
   }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out;
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
