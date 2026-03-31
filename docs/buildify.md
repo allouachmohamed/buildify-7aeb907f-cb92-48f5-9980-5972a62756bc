@@ -39,8 +39,8 @@
 
 - [x] Setup design system with color palette, typography, and theme support
 - [x] Create authentication system (sign up, login, password reset)
-- [ ] Build user profile system with avatars and bios
-- [ ] Implement post creation and feed display
+- [x] Build user profile system with avatars, bios, and verification badges
+- [x] Implement post creation and feed display
 - [ ] Add social interactions (like, comment, share)
 - [ ] Build follow/unfollow system
 - [ ] Create notifications system
