@@ -1,13 +1,17 @@
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useTheme } from './theme-provider';
-import { Moon, Sun, Globe, Menu, X } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
+import { Moon, Sun, Globe, Menu, X, LogOut } from 'lucide-react';
 import { useState } from 'react';
+import { toast } from 'sonner';
 
 const Navbar = () => {
   const { language, setLanguage, t } = useLanguage();
   const { theme, setTheme } = useTheme();
+  const { signOut, profile } = useAuth();
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleLanguage = () => {
@@ -20,6 +24,16 @@ const Navbar = () => {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      toast.success('Signed out successfully');
+      navigate('/login');
+    } catch (error) {
+      toast.error('Failed to sign out');
+    }
   };
 
   return (
@@ -82,6 +96,17 @@ const Navbar = () => {
             >
               {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
             </button>
+
+            {profile && (
+              <button 
+                onClick={handleSignOut}
+                className="p-2 rounded-full hover:bg-primary-foreground/10"
+                aria-label="Sign out"
+                title="Sign out"
+              >
+                <LogOut size={20} />
+              </button>
+            )}
           </div>
         </div>
         
@@ -154,6 +179,17 @@ const Navbar = () => {
               >
                 {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
               </button>
+
+              {profile && (
+                <button 
+                  onClick={handleSignOut}
+                  className="p-2 rounded-full hover:bg-primary-foreground/10"
+                  aria-label="Sign out"
+                  title="Sign out"
+                >
+                  <LogOut size={20} />
+                </button>
+              )}
             </div>
           </div>
         )}
