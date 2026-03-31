@@ -38,7 +38,7 @@
 ## Tasks
 
 - [x] Setup design system with color palette, typography, and theme support
-- [x] Create authentication system (sign up, login, password reset)
+- [x] Create authentication system (sign up, login, password reset, Google OAuth)
 - [x] Build user profile system with avatars, bios, and verification badges
 - [x] Implement post creation and feed display
 - [ ] Add social interactions (like, comment, share)
