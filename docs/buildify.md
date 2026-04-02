@@ -1,52 +1,53 @@
-# Social Media App - Project Plan
+# E-commerce PWA - Project Plan
 
 ## Requirements
 
 ### Core Features
-- **Authentication System**: User registration, login, password reset with secure authentication
-- **Post Management**: Create, edit, delete posts with text and optional media
-- **Social Interactions**: Like, comment, share posts
-- **User Profiles**: Profile pictures, bio, followers/following system
-- **Follow System**: Follow/unfollow users
-- **Real-time Feed**: Timeline showing posts from all users
-- **Notifications**: Alerts for likes, comments, follows
-- **Search**: Find users and posts
-- **Theme Support**: Dark mode and light mode
+- **Bilingual Support**: Full Arabic and English language support with RTL/LTR layouts
+- **Product Catalog**: Browse products with categories, filters, and search
+- **Shopping Cart**: Add/remove items, update quantities, view total
+- **User Authentication**: Sign up, login, and profile management
+- **Checkout Process**: Multi-step checkout with address and payment info
+- **Order Management**: View order history and track orders
+- **Product Details**: Images, descriptions, pricing, reviews, and ratings
+- **Wishlist**: Save favorite products for later
+- **PWA Features**: Installable, offline support, push notifications
 
-### Bonus Features
-- Story feature (Instagram-style)
-- Media upload with preview
-- Verified badges
-- Trending topics
+### Technical Requirements
+- Progressive Web App (PWA) with service worker
+- Fast loading and smooth performance
+- Mobile-first responsive design
+- Native app-like experience
+- Installable on mobile devices
 
 ## Design
 
 ### Visual Design
-- Modern, clean UI optimized for mobile
+- Modern, clean e-commerce UI
+- Beautiful product cards and galleries
 - Smooth animations and transitions
-- Elegant color palette with primary and accent colors
-- Professional typography and spacing
-- Bottom navigation bar for intuitive navigation
+- Professional color scheme
+- Mobile-optimized navigation
+- RTL support for Arabic language
 
 ### Technical Architecture
 - React + TypeScript frontend
 - Buildify Cloud (Supabase) backend
-- Real-time database updates
-- Responsive mobile-first design
-- Clean, scalable code structure
+- PWA with service worker and manifest
+- Bilingual i18n system
+- Responsive RTL/LTR layouts
 
 ## Tasks
 
-- [x] Setup design system with color palette, typography, and theme support
-- [x] Create authentication system (sign up, login, password reset, Google OAuth)
-- [x] Build user profile system with avatars, bios, and verification badges
-- [x] Implement post creation and feed display
-- [ ] Add social interactions (like, comment, share)
-- [ ] Build follow/unfollow system
-- [ ] Create notifications system
-- [ ] Add search functionality
-- [ ] Implement stories feature
-- [ ] Add media upload capabilities
+- [x] Setup design system with bilingual support and PWA foundation
+- [ ] Create product catalog with categories and filters
+- [ ] Build shopping cart functionality
+- [ ] Implement user authentication
+- [ ] Create checkout process
+- [ ] Add order management system
+- [ ] Build product detail pages
+- [ ] Implement wishlist feature
+- [ ] Configure PWA features (manifest, service worker, offline support)
 
 ## Discussions
 
